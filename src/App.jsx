@@ -6,7 +6,6 @@ import UsernameManagementPage from "./pages/UsernameManagement";
 import CPDashboard from "./pages/Dashboard";
 import CPResources from "./pages/CPResources";
 import CP31_ladder from "./pages/CP31";
-import CPRoadmap from "./pages/Roadmap";
 
 const app=()=>{
   return(
