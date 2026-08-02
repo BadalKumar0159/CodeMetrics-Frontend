@@ -1,5 +1,0 @@
-//LOGOUT functionality
-//duration changes in the statistics like 1 weeek , 1 month , ....
-//feedback form
-//different rooms
-//comparison graph on leaderboard
