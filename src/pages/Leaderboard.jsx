@@ -14,7 +14,6 @@ const Leaderboard = () => {
    const [timeRange, setTimeRange] = useState(7);
    const [usersList, setUsersList] = useState([]);
 
-
    const getMedalColor = (index) => {
       switch (index) {
          case 0:
