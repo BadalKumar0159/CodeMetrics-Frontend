@@ -6,7 +6,6 @@ const CP31_ladder = () => {
    const [solvedProblems, setSolvedProblems] = useState(new Set());
    const [loading, setLoading] = useState(false);
    const [problemsView, setProblemsView] = useState([]);
-   const [showConfetti, setShowConfetti] = useState(false);
    const [activeFilter, setActiveFilter] = useState('all');
    const location = useLocation();
 
@@ -82,64 +81,11 @@ const CP31_ladder = () => {
       return "text-red-400 bg-red-900/30 border-red-700/50";
    };
 
-   useEffect(() => {    // Show confetti when the user has solved more than 75% of problems
-      const solvedPercentage = (solvedCount / totalProblems) * 100;
-      if (solvedPercentage >= 75 && solvedCount > 0) {
-         setShowConfetti(true);
-         const timer = setTimeout(() => setShowConfetti(false), 5000);
-         return () => clearTimeout(timer);
-      }
-   }, [solvedCount, totalProblems]);
-
    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-indigo-900 py-8 px-4 overflow-hidden relative">
-         {/* Decorative elements */}
-         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div className="absolute top-10 left-10 w-96 h-96 bg-blue-500 opacity-10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-40 right-20 w-64 h-64 bg-indigo-600 opacity-10 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-cyan-400 opacity-10 rounded-full blur-xl animate-pulse"></div>
-         </div>
-
-         {/* Confetti overlay - shown when achievement unlocked */}
-         {showConfetti && (
-            <div className="fixed inset-0 pointer-events-none z-50">
-               <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-8 bg-gray-800/80 backdrop-blur-lg rounded-xl border border-blue-500/30 shadow-2xl max-w-md">
-                     <div className="text-center">
-                        <Trophy className="h-16 w-16 text-yellow-400 mx-auto mb-4" />
-                        <h2 className="text-2xl font-bold text-white mb-2">Achievement Unlocked!</h2>
-                        <p className="text-gray-300">You've solved over 75% of problems in this ladder!</p>
-                     </div>
-                  </div>
-               </div>
-               {/* Animated confetti particles */}
-               {[...Array(50)].map((_, i) => {
-                  const size = Math.random() * 10 + 5;
-                  const left = Math.random() * 100;
-                  const animationDuration = Math.random() * 3 + 2;
-                  const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-400', 'bg-pink-500', 'bg-purple-500'];
-                  const color = colors[Math.floor(Math.random() * colors.length)];
-
-                  return (
-                     <div key={i} className={`absolute ${color} rounded-sm`}
-                        style={{
-                           width: `${size}px`,
-                           height: `${size}px`,
-                           left: `${left}%`,
-                           top: '-20px',
-                           opacity: Math.random() * 0.7 + 0.3,
-                           animation: `confetti ${animationDuration}s linear forwards`,
-                           transform: `rotate(${Math.random() * 360}deg)`
-                        }}
-                     ></div>
-                  );
-               })}
-            </div>
-         )}
-
+      <div className="min-h-screen bg-gradient-to-br from-slate-950  to-blue-950 py-8 px-4 overflow-hidden relative">
          <div className="mx-auto max-w-5xl relative">
             {/* Header */}
-            <div className="backdrop-blur-xl bg-black/40  rounded-2xl shadow-2xl p-8 mb-8 border border-gray-700/50 transform transition-all hover:border-blue-500/30 duration-500">
+            <div className="backdrop-blur-xl bg-slate-950/50  rounded-2xl shadow-2xl p-8 mb-8 border border-gray-700/60 transform transition-all hover:border-blue-500/30 duration-100">
                <Link to="/cp-resources" className="inline-flex items-center text-gray-400 hover:text-blue-400 mb-6 transition-all duration-300 group">
                   <div className="p-2 rounded-full bg-gray-800/80 border border-gray-700/50 mr-2 group-hover:border-blue-500/50 transition-all duration-300">
                      <ArrowLeft className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -153,16 +99,16 @@ const CP31_ladder = () => {
                         <Code className="h-10 w-10 text-blue-400" />
                      </div>
                   </div>
-                  <h1 className="py-2 text-5xl font-bold mb-2 tracking-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 text-transparent bg-clip-text">
+                  <h1 className="py-2 text-5xl font-bold mb-2 tracking-tight text-blue-400">
                      {selectedRating}
                   </h1>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light">
+                  <p className="text-xl text-blue-300/70 max-w-2xl mx-auto font-light">
                      Master competitive programming one problem at a time
                   </p>
                </div>
 
                {/* User info and progress */}
-               <div className="bg-gray-800/60 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl hover:border-blue-500/30 transition-all duration-500">
+               <div className="bg-slate-900 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl hover:border-blue-500/30 transition-all duration-500">
                   <div className="flex flex-col md:flex-row items-center justify-between mb-6">
                      <div className="flex items-center mb-4 md:mb-0">
                         <div className="relative">
@@ -182,7 +128,7 @@ const CP31_ladder = () => {
                         </div>
                      </div>
 
-                     <div className="flex items-center gap-3 bg-gray-900/70 px-5 py-3 rounded-lg border border-gray-700/60 shadow-lg ">
+                     <div className="flex items-center gap-3 bg-slate-900/70 px-5 py-3 rounded-lg border border-gray-700/60 shadow-lg ">
                         <BarChart className="h-5 w-5 text-blue-400" />
                         <div>
                            <div className="font-medium text-white text-lg">{Math.round(progressPercentage)}% Complete</div>
@@ -223,7 +169,7 @@ const CP31_ladder = () => {
             </div>
 
             {/* Problems list */}
-            <div className="backdrop-blur-xl bg-black/40 rounded-2xl shadow-2xl p-8 border border-gray-700/50 transform transition-all hover:border-blue-500/30 duration-500">
+            <div className="backdrop-blur-xl bg-slate-950/50 rounded-2xl shadow-2xl p-8 border border-gray-700/60 transform transition-all hover:border-blue-500/30 duration-500">
                <div className="flex flex-col md:flex-row items-center justify-between mb-8">
                   <h2 className="text-2xl font-bold flex items-center text-white mb-4 md:mb-0">
                      <Code className="h-6 w-6 mr-2 text-blue-400" />
@@ -275,7 +221,7 @@ const CP31_ladder = () => {
                               return (
                                  <div key={`${problemId}-${index}`} className={`flex flex-col sm:flex-row sm:items-center p-3 rounded-xl border group backdrop-blur-md
                                  hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01] hover:border-blue-500/30 ${isSolved ?
-                                       "bg-gradient-to-r from-green-900/40 to-green-800/20 border-green-700/50" : "bg-gradient-to-r from-gray-800/60 to-gray-900/60 border-gray-700/70"}`} >
+                                       "bg-gradient-to-r from-green-900/40 to-green-800/20 border-green-700/50" : "bg-gradient-to-r from-slate-800/60 to-slate-900/60 border-gray-700/70"}`} >
                                     <div className="flex items-center mb-3 sm:mb-0">
                                        <div className={`text-sm font-medium px-3 py-1 rounded-full border ${getRatingColor(rating)}`} >
                                           {rating || "N/A"}
@@ -315,8 +261,8 @@ const CP31_ladder = () => {
 
             {/* Bottom stat cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-               <div className="flex items-center backdrop-blur-lg bg-black/40 rounded-xl p-4 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
-                  <div className="p-2 rounded-lg bg-blue-900/40 border border-blue-700/50 mr-3">
+               <div className="flex items-center backdrop-blur-lg bg-slate-950/50 rounded-xl p-4 border border-gray-700/60 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
+                  <div className="p-2 rounded-lg bg-blue-900/40 border border-blue-700/60 mr-3">
                      <Trophy className="h-5 w-5 text-blue-400" />
                   </div>
                   <div>
@@ -325,8 +271,8 @@ const CP31_ladder = () => {
                   </div>
                </div>
 
-               <div className="flex items-center backdrop-blur-lg bg-black/40 rounded-xl p-4 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
-                     <div className="p-2 rounded-lg bg-indigo-900/40 border border-indigo-700/50 mr-3">
+               <div className="flex items-center backdrop-blur-lg bg-slate-950/50 rounded-xl p-4 border border-gray-700/60 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
+                     <div className="p-2 rounded-lg bg-indigo-900/40 border border-indigo-700/60 mr-3">
                         <BarChart className="h-5 w-5 text-indigo-400" />
                      </div>
                      <div>
@@ -335,8 +281,8 @@ const CP31_ladder = () => {
                      </div>
                </div>
 
-               <div className="flex items-center backdrop-blur-lg bg-black/40 rounded-xl p-4 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
-                     <div className="p-2 rounded-lg bg-purple-900/40 border border-purple-700/50 mr-3">
+               <div className="flex items-center backdrop-blur-lg bg-slate-950/50 rounded-xl p-4 border border-gray-700/60 hover:border-blue-500/30 transition-all duration-300 shadow-lg">
+                     <div className="p-2 rounded-lg bg-purple-900/40 border border-purple-700/60 mr-3">
                         <Code className="h-5 w-5 text-purple-400" />
                      </div>
                      <div>
@@ -346,22 +292,6 @@ const CP31_ladder = () => {
                </div>
             </div>
          </div>
-
-         {/* Add CSS animation for confetti */}
-         <style>
-            {`
-               @keyframes confetti {
-                  0% { 
-                     transform: translateY(0) rotate(0deg);
-                     opacity: 1;
-                  }
-                  100% { 
-                     transform: translateY(100vh) rotate(720deg);
-                     opacity: 0;
-                  }
-               }
-            `}
-         </style>
       </div>
    );
 };

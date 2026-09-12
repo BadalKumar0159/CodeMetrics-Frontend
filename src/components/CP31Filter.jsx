@@ -85,8 +85,7 @@ const CP31Filter = () => {
    }, []);
 
    return (
-      <div className=" relative rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden transition-all 
-      duration-300 transform hover:shadow-blue-500/10 hover:border-blue-500/30">
+      <div className="relative p-6">
          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
 
          <div className="p-8">

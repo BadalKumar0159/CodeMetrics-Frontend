@@ -297,11 +297,11 @@ const UserDetailsPage = () => {
          <div className="max-w-6xl mx-auto">
             <button onClick={navigateBack} className="flex items-center gap-1 mb-6 text-sky-400 hover:text-sky-300 transition-colors" >
                <ArrowLeft size={18} />
-               <span>Back to Leaderboard</span>
+               <span>Go Back</span>
             </button>
 
             {/* User Profile Header */}
-            <div className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden mb-6">
+            <div className="bg-gray-800/50 border border-gray-700/50 shadow-lg shadow-black/20 rounded-lg overflow-hidden mb-6">
                <div className="flex flex-col md:flex-row items-start md:items-center p-6 md:p-6 gap-6">
                   <div className="w-24 h-24 bg-gray-700 rounded-full overflow-hidden flex-shrink-0">
                      {userData.avatar ? (
@@ -376,14 +376,14 @@ const UserDetailsPage = () => {
                      Problems
                   </button>
 
-                  <button onClick={() => setActiveTab('submissions')} className={`px-6 py-3 text-sm font-medium whitespace-nowrap 
-                     ${activeTab === 'submissions' ? 'text-sky-400 border-b-2 border-sky-400' : 'text-gray-300 hover:text-white transition-colors'}`} >
-                     Submissions
-                  </button>
-
                   <button onClick={() => setActiveTab('statistics')} className={`px-6 py-3 text-sm font-medium whitespace-nowrap 
                      ${activeTab === 'statistics' ? 'text-sky-400 border-b-2 border-sky-400' : 'text-gray-300 hover:text-white transition-colors'}`} >
                      Statistics
+                  </button>
+
+                  <button onClick={() => setActiveTab('submissions')} className={`px-6 py-3 text-sm font-medium whitespace-nowrap 
+                     ${activeTab === 'submissions' ? 'text-sky-400 border-b-2 border-sky-400' : 'text-gray-300 hover:text-white transition-colors'}`} >
+                     Submissions
                   </button>
                </div>
             </div>
@@ -395,7 +395,7 @@ const UserDetailsPage = () => {
                {activeTab === 'overview' && (
                   <>
                      {/* Recent Activity Chart */}
-                     <div className="border border-gray-700 bg-gray-800 rounded-lg shadow-lg p-6">
+                     <div className="border border-gray-700/50 bg-gray-800/50 rounded-lg shadow-lg shadow-black/20 p-6">
                         <h2 className="text-xl font-semibold mb-5 text-sky-400">Recent Activity</h2>
                         <ResponsiveContainer width="100%" height={350}>
                            <RechartsLineChart data={userData.recentActivity} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -417,7 +417,7 @@ const UserDetailsPage = () => {
 
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Submission Verdicts */}
-                        <div className="bg-gray-800 border border-gray-700  rounded-lg shadow-lg p-6">
+                        <div className="bg-gray-800/50 border border-gray-700/50  rounded-lg shadow-lg shadow-black/20 p-6">
                            <h2 className="text-xl font-semibold mb-4 text-sky-400">Submission Verdicts</h2>
                            <div className="flex flex-row h-64">
                               {/* Pie Chart */}
@@ -472,7 +472,7 @@ const UserDetailsPage = () => {
                         </div>
 
                         {/* Languages */}
-                        <div className="bg-gray-800 border border-gray-700  rounded-lg shadow-lg p-6">
+                        <div className="bg-gray-800/50 border border-gray-700/50  rounded-lg shadow-lg shadow-black/20 p-6">
                            <h2 className="text-xl font-semibold mb-4 text-sky-400">Languages Used</h2>
                            <div className="flex flex-row h-64">
                               {/* Pie Chart */}
@@ -540,7 +540,7 @@ const UserDetailsPage = () => {
                {activeTab === 'problems' && (
                   <>
                      {/* Problems by Rating */}
-                     <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6">
+                     <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 p-6">
                         <h2 className="text-xl font-semibold mb-4 text-sky-400">Problems by Rating</h2>
                         {userData.problemsByRating && userData.problemsByRating.length > 0 ? (
                            <ResponsiveContainer width="100%" height={400}>
@@ -567,7 +567,7 @@ const UserDetailsPage = () => {
                      </div>
 
                      {/* Problem Tags */}
-                     <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 mt-6">
+                     <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 p-6 mt-6">
                         <h2 className="text-xl font-semibold mb-4 text-sky-400">Problem Tags Solved</h2>
                         {userData.tagStats && userData.tagStats.length > 0 ? (
                            <ResponsiveContainer width="100%" height={400}>
@@ -595,7 +595,7 @@ const UserDetailsPage = () => {
 
                {/* Submissions Tab */}
                {activeTab === 'submissions' && (
-                  <div className="bg-gray-800 border border-gray-600/30 rounded-lg shadow-lg overflow-hidden">
+                  <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 overflow-hidden">
                      <div className="overflow-x-auto">
                         <table className="w-full">
                            <thead className="bg-gray-900/70 text-left">
@@ -675,83 +675,79 @@ const UserDetailsPage = () => {
                {activeTab === 'statistics' && (
                   <div className="space-y-6">
                      {/* Time of Day Analysis */}
-                     <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-                        <h2 className="text-xl font-semibold mb-4 text-blue-400">Submission Time Analysis</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                           <div>
-                              <h3 className="text-lg font-medium mb-3 text-gray-300">Time of Day</h3>
-                              {(() => {
-                                 // Calculate submission time distribution
-                                 const hourData = Array(24).fill(0);
-                                 submissions.forEach(sub => {
-                                    const hour = new Date(sub.creationTimeSeconds * 1000).getHours();
-                                    hourData[hour]++;
-                                 });
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+                        <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/30 p-6">
+                           <h3 className="text-lg font-medium mb-3 text-sky-400">Time of Day</h3>
+                           {(() => {
+                              const hourData = Array(24).fill(0);
+                              submissions.forEach(sub => {
+                                 const hour = new Date(sub.creationTimeSeconds * 1000).getHours();
+                                 hourData[hour]++;
+                              });
 
-                                 const timeData = hourData.map((count, hour) => ({
-                                    hour: `${hour}:00`,
-                                    submissions: count
-                                 }));
+                              const timeData = hourData.map((count, hour) => ({
+                                 hour: `${hour.toString().padStart(2, '0')}:00`,
+                                 submissions: count
+                              }));
 
-                                 return (
-                                    <ResponsiveContainer width="100%" height={200}>
-                                       <BarChart data={timeData}>
-                                          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                                          <XAxis dataKey="hour" stroke="#999" />
-                                          <YAxis stroke="#999" />
-                                          <Tooltip
-                                             contentStyle={{ backgroundColor: '#111', borderColor: '#333' }}
-                                             itemStyle={{ color: '#fff' }}
-                                          />
-                                          <Bar dataKey="submissions" fill="#8884d8" />
-                                       </BarChart>
-                                    </ResponsiveContainer>
-                                 );
-                              })()}
-                           </div>
+                              return (
+                                 <ResponsiveContainer width="100%" height={200}>
+                                    <BarChart data={timeData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+                                       <XAxis dataKey="hour" stroke="#9CA3AF" axisLine={false} tickLine={false} tickFormatter={(value) => value.split(':')[0]} />
+                                       <YAxis stroke="#9CA3AF" axisLine={false} tickLine={false} allowDecimals={false} />
+                                       <Tooltip
+                                          cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }}
+                                          contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '8px' }}
+                                          itemStyle={{ color: '#FFF' }} labelStyle={{ color: '#38BDF8', fontWeight: '600' }}
+                                       />
+                                       <Bar dataKey="submissions" fill="#38BDF8" radius={[4, 4, 0, 0]} maxBarSize={32} />
+                                    </BarChart>
+                                 </ResponsiveContainer>
+                              );
+                           })()}
+                        </div>
 
-                           <div>
-                              <h3 className="text-lg font-medium mb-3 text-gray-300">Day of Week</h3>
-                              {(() => {
-                                 // Calculate day of week distribution
-                                 const dayData = Array(7).fill(0);
-                                 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/30 p-6">
+                           <h3 className="text-lg font-medium mb-3 text-sky-400">Day of Week</h3>
+                           {(() => {
+                              const dayData = Array(7).fill(0);
+                              const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-                                 submissions.forEach(sub => {
-                                    const day = new Date(sub.creationTimeSeconds * 1000).getDay();
-                                    dayData[day]++;
-                                 });
+                              submissions.forEach(sub => {
+                                 const day = new Date(sub.creationTimeSeconds * 1000).getDay();
+                                 dayData[day]++;
+                              });
 
-                                 const weekData = dayData.map((count, day) => ({
-                                    day: dayNames[day],
-                                    submissions: count
-                                 }));
+                              const weekData = dayData.map((count, day) => ({
+                                 day: dayNames[day],
+                                 submissions: count
+                              }));
 
-                                 return (
-                                    <ResponsiveContainer width="100%" height={200}>
-                                       <BarChart data={weekData}>
-                                          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                                          <XAxis dataKey="day" stroke="#999" />
-                                          <YAxis stroke="#999" />
-                                          <Tooltip
-                                             contentStyle={{ backgroundColor: '#111', borderColor: '#333' }}
-                                             itemStyle={{ color: '#fff' }}
-                                          />
-                                          <Bar dataKey="submissions" fill="#82ca9d" />
-                                       </BarChart>
-                                    </ResponsiveContainer>
-                                 );
-                              })()}
-                           </div>
+                              return (
+                                 <ResponsiveContainer width="100%" height={200}>
+                                    <BarChart data={weekData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+                                       <XAxis dataKey="day" stroke="#9CA3AF" axisLine={false} tickLine={false} />
+                                       <YAxis stroke="#9CA3AF" axisLine={false} tickLine={false} allowDecimals={false} />
+                                       <Tooltip
+                                          cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }}
+                                          contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '8px' }}
+                                          itemStyle={{ color: '#FFF' }} labelStyle={{ color: '#10B981', fontWeight: '600' }}
+                                       />
+                                       <Bar dataKey="submissions" fill="#10B981" radius={[4, 4, 0, 0]} maxBarSize={32} />
+                                    </BarChart>
+                                 </ResponsiveContainer>
+                              );
+                           })()}
                         </div>
                      </div>
 
                      {/* Performance Metrics */}
-                     <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-                        <h2 className="text-xl font-semibold mb-4 text-blue-400">Performance Metrics</h2>
+                     <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 p-6">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                            {/* Acceptance Rate */}
-                           <div className="bg-gray-700/40 p-4 rounded-lg">
+                           <div className="p-4 rounded-lg">
                               <div className="flex items-center gap-2 mb-2">
                                  <CheckCircle size={18} className="text-green-400" />
                                  <h3 className="text-lg font-medium text-gray-200">Acceptance Rate</h3>
@@ -773,10 +769,10 @@ const UserDetailsPage = () => {
                            </div>
 
                            {/* Average Attempts per Problem */}
-                           <div className="bg-gray-700/40 p-4 rounded-lg">
+                           <div className="p-4 rounded-lg">
                               <div className="flex items-center gap-2 mb-2">
                                  <RefreshCw size={18} className="text-blue-400" />
-                                 <h3 className="text-lg font-medium text-gray-200">Avg Attempts</h3>
+                                 <h3 className="text-lg font-medium text-gray-200">Average Attempts</h3>
                               </div>
                               {(() => {
                                  // Count attempts per problem
@@ -802,17 +798,14 @@ const UserDetailsPage = () => {
                            </div>
 
                            {/* Solved Problem Trend */}
-                           <div className="bg-gray-700/40 p-4 rounded-lg">
+                           <div className="p-4 rounded-lg">
                               <div className="flex items-center gap-2 mb-2">
                                  <TrendingUp size={18} className="text-orange-400" />
                                  <h3 className="text-lg font-medium text-gray-200">Problem Trend</h3>
                               </div>
                               {(() => {
-                                 // Count solved problems per month (last 6 months)
-                                 const months = [];
-                                 const labels = [];
-                                 const solvedCounts = [];
-
+                                 const months = [];       // Count solved problems per month (last 6 months)
+                              
                                  for (let i = 5; i >= 0; i--) {
                                     const date = new Date();
                                     date.setMonth(date.getMonth() - i);
@@ -821,46 +814,35 @@ const UserDetailsPage = () => {
 
                                     const monthSolved = new Set();
                                     submissions.forEach(sub => {
-                                       if (sub.verdict === "OK" &&
-                                          sub.creationTimeSeconds >= monthStart &&
-                                          sub.creationTimeSeconds <= monthEnd) {
+                                       if (sub.verdict === "OK" && sub.creationTimeSeconds >= monthStart && sub.creationTimeSeconds <= monthEnd) {
                                           const problemId = `${sub.problem.contestId}-${sub.problem.index}`;
                                           monthSolved.add(problemId);
                                        }
                                     });
 
                                     months.push({
-                                       month: `${date.toLocaleString('default', { month: 'short' })}`,
+                                       month: `${date.toLocaleDateString('default', { month: 'short' })}`,
                                        solved: monthSolved.size
                                     });
-
-                                    labels.push(date.toLocaleString('default', { month: 'short' }));
-                                    solvedCounts.push(monthSolved.size);
                                  }
 
                                  return (
                                     <>
                                        <ResponsiveContainer width="100%" height={80}>
                                           <RechartsLineChart data={months}>
-                                             <Line
-                                                type="monotone"
-                                                dataKey="solved"
-                                                stroke="#ff9d00"
-                                                strokeWidth={2}
-                                                dot={{ r: 3 }}
-                                                activeDot={{ r: 5 }}
-                                             />
                                              <XAxis dataKey="month" hide />
                                              <YAxis hide />
-                                             <Tooltip
-                                                contentStyle={{ backgroundColor: '#111', borderColor: '#333' }}
-                                                formatter={(value) => [`${value} problems`, 'Solved']}
+                                             <Tooltip       //label uses x-axis value & formatter used y-axis value
+                                                contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '8px' }}
+                                                formatter={(value) => [value , 'Problems Solved']}   //view: Problems Solved: value
                                                 labelFormatter={(label) => `${label} ${new Date().getFullYear()}`}
+                                                itemStyle={{ color: '#FFF' }} labelStyle={{ color: '#ff9d00', fontWeight: '600' }}
                                              />
+                                             <Line type="monotone" dataKey="solved" stroke="#ff9d00" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
                                           </RechartsLineChart>
                                        </ResponsiveContainer>
                                        <div className="text-sm text-gray-400 text-center">
-                                          Problems solved per month (last 6 months)
+                                          Problems solved per month
                                        </div>
                                     </>
                                  );
@@ -872,43 +854,39 @@ const UserDetailsPage = () => {
                      {/* Additional Statistics */}
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Attempt Distribution */}
-                        <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-                           <h2 className="text-xl font-semibold mb-4 text-blue-400">Attempts per Problem</h2>
+                        <div className="bg-gray-800/50  border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 p-6">
+                           <h2 className="text-xl font-semibold mb-4 text-sky-400">Attempts per Problem</h2>
                            {(() => {
-                              // Calculate attempts per problem
                               const problemAttempts = {};
                               submissions.forEach(sub => {
                                  const problemId = `${sub.problem.contestId}-${sub.problem.index}`;
                                  problemAttempts[problemId] = (problemAttempts[problemId] || 0) + 1;
                               });
 
-                              // Count problems by number of attempts
                               const attemptsCount = {};
                               Object.values(problemAttempts).forEach(attempts => {
                                  attemptsCount[attempts] = (attemptsCount[attempts] || 0) + 1;
                               });
 
-                              // Create data for chart
-                              const attemptData = Object.entries(attemptsCount)
-                                 .map(([attempts, count]) => ({
-                                    attempts: attempts === "1" ? "1 attempt" : `${attempts} attempts`,
-                                    count,
-                                    value: parseInt(attempts)
-                                 }))
-                                 .sort((a, b) => a.value - b.value);
+                              const attemptData = Object.entries(attemptsCount).map(([attempts, count]) => ({
+                                 attempts: attempts === "1" ? "1 attempt" : `${attempts} attempts`,
+                                 count,
+                                 value: parseInt(attempts)
+                              })).sort((a, b) => a.value - b.value);
 
                               return (
-                                 <ResponsiveContainer width="100%" height={300}>
-                                    <BarChart data={attemptData}>
-                                       <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                                       <XAxis dataKey="attempts" stroke="#999" />
-                                       <YAxis stroke="#999" />
+                                 <ResponsiveContainer width="100%" height={250}>
+                                    <BarChart data={attemptData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+                                       <XAxis dataKey="attempts" stroke="#9CA3AF" axisLine={false} tickLine={false} />
+                                       <YAxis stroke="#9CA3AF" axisLine={false} tickLine={false} allowDecimals={false} />
                                        <Tooltip
-                                          contentStyle={{ backgroundColor: '#111', borderColor: '#333' }}
-                                          itemStyle={{ color: '#fff' }}
-                                          formatter={(value) => [`${value} problems`, 'Count']}
+                                          cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }}
+                                          contentStyle={{ backgroundColor: '#1F2937', borderColor: '#374151', borderRadius: '8px' }}
+                                          itemStyle={{ color: '#FFF' }} labelStyle={{ color: '#EC4899', fontWeight: '600' }}
+                                          formatter={(value) => [`${value} problems`]}
                                        />
-                                       <Bar dataKey="count" fill="#ff7c7c" />
+                                       <Bar dataKey="count" fill="#EC4899" radius={[4, 4, 0, 0]} maxBarSize={32} />
                                     </BarChart>
                                  </ResponsiveContainer>
                               );
@@ -916,16 +894,14 @@ const UserDetailsPage = () => {
                         </div>
 
                         {/* Solved by Rating */}
-                        <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-                           <h2 className="text-xl font-semibold mb-4 text-blue-400">Difficulty Level Progress</h2>
+                        <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg shadow-lg shadow-black/20 p-6">
+                           <h2 className="text-xl font-semibold mb-4 text-sky-400">Difficulty Level Progress</h2>
                            {(() => {
-                              // Calculate max rating solved over time
-                              const solvedProblemsByTime = [];
+                              const solvedProblemsByTime = [];                // Calculate max rating solved over time
                               const seenProblems = new Set();
                               let maxRating = 0;
 
-                              // Sort submissions by time
-                              const sortedSubmissions = [...submissions]
+                              const sortedSubmissions = [...submissions]      // Sort submissions by time
                                  .filter(sub => sub.verdict === "OK" && sub.problem.rating)
                                  .sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds);
 
@@ -933,7 +909,7 @@ const UserDetailsPage = () => {
                                  const problemId = `${sub.problem.contestId}-${sub.problem.index}`;
                                  if (!seenProblems.has(problemId)) {
                                     seenProblems.add(problemId);
-                                    maxRating = Math.max(maxRating, sub.problem.rating || 0);
+                                    maxRating = Math.max(maxRating, sub.problem.rating);
                                     solvedProblemsByTime.push({
                                        time: new Date(sub.creationTimeSeconds * 1000).toLocaleDateString(),
                                        maxRating,
@@ -942,47 +918,36 @@ const UserDetailsPage = () => {
                                  }
                               });
 
-                              // Take a subset of points to avoid overcrowding (every 10th point)
-                              const chartData = solvedProblemsByTime.filter((_, i) =>
-                                 i === 0 || i === solvedProblemsByTime.length - 1 || i % 10 === 0
+                              const chartData = solvedProblemsByTime.filter((_, i) => 
+                                 i === 0 || i === solvedProblemsByTime.length - 1 || i % 10 === 0  // only take frist, 1 out of each 10, last
                               );
 
                               return (
-                                 <ResponsiveContainer width="100%" height={300}>
-                                    <RechartsLineChart data={chartData}>
-                                       <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                                       <XAxis
-                                          dataKey="problemCount"
-                                          stroke="#999"
-                                          label={{ value: 'Problems Solved', position: 'insideBottom', offset: -5, fill: '#999' }}
-                                       />
-                                       <YAxis
-                                          stroke="#999"
-                                          label={{ value: 'Max Rating', angle: -90, position: 'insideLeft', fill: '#999' }}
-                                       />
+                                 <ResponsiveContainer width="100%" height={250}>
+                                    <RechartsLineChart data={chartData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
+                                       <XAxis dataKey="problemCount" stroke="#9CA3AF" axisLine={false} tickLine={false} />
+                                       <YAxis stroke="#9CA3AF" axisLine={false} tickLine={false} />
                                        <Tooltip
                                           content={({ active, payload }) => {
-                                             if (active && payload && payload.length) {
+                                             if (active && payload?.length) {
+                                                const data = payload[0].payload;  //original cartData obj
                                                 return (
-                                                   <div style={{
-                                                      backgroundColor: '#111',
-                                                      border: '1px solid #333',
-                                                      padding: '10px',
-                                                      color: 'white'
-                                                   }}>
-                                                      <p>{`${payload[0].name}: ${payload[0].value} submissions`}</p>
+                                                   <div className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                                      <p className="text-fuchsia-500 text-base"> {`Max Rating: ${data.maxRating}`} </p>
+                                                      <p className="text-gray-200 text-base mb-1"> {`Problems Solved: ${data.problemCount}`} </p>
                                                    </div>
                                                 );
                                              }
                                              return null;
                                           }}
                                        />
-                                       <Line type="monotone" dataKey="maxRating" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                       <Line type="monotone" dataKey="maxRating" stroke='#D946EF' strokeWidth={2} dot={{ fill: '#FFFFFF', r: 3, stroke: '#D946EF', strokeWidth: 1 }} activeDot={{ r: 5, fill: '#FFFFFF', stroke: '#D946EF', strokeWidth: 2 }} />
                                     </RechartsLineChart>
                                  </ResponsiveContainer>
                               );
                            })()}
-                        </div>``
+                        </div>
                      </div>
                   </div>
                )}

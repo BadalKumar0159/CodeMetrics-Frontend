@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Award, BookOpen, ArrowRight, Share2, FileText, Code, User, Star, ExternalLink, RefreshCw, ArrowLeft,
-  CheckCircle, MessageSquare
-} from 'lucide-react';
+import { Award, BookOpen, ArrowRight, FileText, Code, User, Star, } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
-import CodeMetricsLogo2 from '../components/Logo2';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SharePopUp from '../components/SharePopUp';
@@ -19,10 +15,6 @@ const CPDashboard = () => {
 
   const shareUrl = "https://codemetrics-frontend.vercel.app/";
   const shareMessage = "Check out CodeMetrics - the ultimate tool for tracking competitive programming progress! Join me in improving our coding skills.";
-
-  const handleGoBack = () => {           // Handle go back function
-    navigate(-1);
-  };
 
   const handleShare = async () => {       // Share functionality
     setShowSharePopup(true);
@@ -50,22 +42,21 @@ const CPDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 text-white p-3 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 to-blue-950 text-white p-3 sm:p-6">
       <div className="max-w-4xl mx-auto">
 
         {/* Header section with logo */}
-        <Header handleGoBack={handleGoBack} handleShare={handleShare} off={true} />
+        <Header handleShare={handleShare} off={true} />
 
         {/* Main content - Two cards side by side */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {/* Leaderboard Card */}
-          <div className="group bg-black/30 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/50 overflow-hidden hover:shadow-blue-500/10 transition-shadow">
+          <div className="group bg-slate-950/50 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/60 overflow-hidden hover:shadow-blue-500/10 transition-shadow">
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 group-hover:opacity-50 transition-opacity"></div>
-              <div className="h-32 sm:h-40 flex items-center justify-center p-6 relative">
+              <div className="h-32 sm:h-40 flex items-center justify-center p-6">
                 <Award className="w-16 h-16 sm:w-20 sm:h-20 text-blue-400 opacity-80 group-hover:scale-110 transition-transform" />
-                <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-600/10 rounded-full blur-xl"></div>
-                <div className="absolute -top-8 -left-8 w-24 h-24 bg-indigo-600/10 rounded-full blur-xl"></div>
+    
               </div>
             </div>
 
@@ -101,13 +92,11 @@ const CPDashboard = () => {
           </div>
 
           {/* CP Sheets Card */}
-          <div className="group bg-black/30 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/50 overflow-hidden hover:shadow-purple-500/10 transition-shadow">
+          <div className="group bg-slate-950/50 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/60 overflow-hidden hover:shadow-purple-500/10 transition-shadow">
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 group-hover:opacity-50 transition-opacity"></div>
-              <div className="h-32 sm:h-40 flex items-center justify-center p-6 relative">
+              <div className="h-32 sm:h-40 flex items-center justify-center p-6">
                 <BookOpen className="w-16 h-16 sm:w-20 sm:h-20 text-purple-400 opacity-80 group-hover:scale-110 transition-transform" />
-                <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-purple-600/10 rounded-full blur-xl"></div>
-                <div className="absolute -top-8 -left-8 w-24 h-24 bg-pink-600/10 rounded-full blur-xl"></div>
               </div>
             </div>
 

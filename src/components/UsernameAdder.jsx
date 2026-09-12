@@ -50,7 +50,7 @@ const UsernameAdder = ({ onAddUser = () => { }, userId }) => {
    };
 
    return (
-      <div className="bg-black/30 backdrop-blur-lg rounded-xl shadow-xl p-4 sm:p-5 w-full mx-auto border border-gray-700/50 h-full">
+      <div className="bg-slate-950/50 backdrop-blur-lg rounded-xl shadow-xl p-4 sm:p-5 w-full mx-auto border border-gray-700/40 h-full">
          <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300 
          flex items-center gap-1 sm:gap-2">
             <Plus size={18} className="sm:size-8 text-white" />
@@ -64,7 +64,7 @@ const UsernameAdder = ({ onAddUser = () => { }, userId }) => {
 
             <div className="relative">
                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter Codeforces username"
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800/70 border border-gray-600/80 rounded-lg text-white text-xs sm:text-sm 
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/70 border border-gray-600/80 rounded-lg text-white text-xs sm:text-sm 
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-inner placeholder-gray-500"
                   onKeyPress={(e) => e.key === 'Enter' && !loading && addUsername()} disabled={loading} />
             </div>

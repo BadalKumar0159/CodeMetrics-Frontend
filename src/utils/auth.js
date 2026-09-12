@@ -5,15 +5,15 @@ const login = async (email, password) => {
         const body = { email, password };
         const response = await axios.post(`${link}/api/auth/login`, body);
 
-        return { success: true, message: response.data.message };
+        return { success: true, message: response.data.message, name: response.data.name, handle: response.data.handle };
     } catch (err) {
         return { success: false, message: err.response?.data?.message || "Server error" };
     }
 };
 
-const register = async (email, password) => {
+const register = async (email, password, name, handle) => {
     try {
-        const body = { email, password };
+        const body = { email, password, name, handle };
         const response = await axios.post(`${link}/api/auth/register`, body);
 
         return { success: true, message: response.data.message };

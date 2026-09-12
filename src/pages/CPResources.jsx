@@ -17,10 +17,6 @@ const CP_Resources = () => {
    const shareUrl = "https://codemetrics-rosy.vercel.app/";
    const shareMessage = "Check out CodeMetrics - the ultimate tool for tracking competitive programming progress! Join me in improving our coding skills.";
 
-   const handleGoBack = () => {
-      navigate(-1);
-   };
-
    const handleShare = async () => {       // Share functionality
     setShowSharePopup(true);
 
@@ -48,11 +44,11 @@ const CP_Resources = () => {
    );
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-indigo-900 text-white p-4 md:p-6 flex flex-col">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950  to-blue-950 text-white p-4 md:p-6 flex flex-col">
          <div className="max-w-5xl mx-auto flex-grow w-full">
 
             {/* Header section */}
-            <Header handleGoBack={handleGoBack} handleShare={handleShare}/>
+            <Header handleShare={handleShare}/>
             
             {/* Tab Navigation */}
             <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -61,7 +57,7 @@ const CP_Resources = () => {
             </div>
 
             {/* Content Area */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-blue-900/30 border border-gray-700/40">
+            <div className="bg-slate-950/50 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden transition-all duration-300 border border-gray-700/60">
                <div className={`relative ${activeTab === 0 ? "h-auto" : "h-[700px]"}`}>
 
                   {/* Content with conditional height and scrollbar */}

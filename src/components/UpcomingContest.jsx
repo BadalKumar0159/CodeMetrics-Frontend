@@ -85,7 +85,7 @@ const UpcomingContest = () => {
    }, [fetchContests]);
 
    return (
-      <div className="p-6">
+      <div className=" relative p-6">
          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500"></div>
          <h2 className="flex items-center justify-center gap-2 text-2xl font-bold text-blue-100 mb-10">
             <Trophy className="text-blue-400 size-6" />
@@ -115,8 +115,8 @@ const UpcomingContest = () => {
 
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 will-change-transform">
             {visibleContests.map((contest, index) => (
-               <div key={contest.id || index} className="bg-black/40 backdrop-blur-md rounded-xl overflow-hidden border border-gray-700/70
-               hover:border-blue-700/70 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/40 transform hover:-translate-y-1 
+               <div key={contest.id || index} className="bg-slate-950 backdrop-blur-md rounded-xl overflow-hidden border border-gray-700/50
+               hover:border-blue-700/40 transition-all duration-300 transform hover:-translate-y-1 
                will-change-transform">
                   <div className="p-4 bg-blue-900/50  border-b border-gray-700/40">
                      <div className="flex justify-between items-start">

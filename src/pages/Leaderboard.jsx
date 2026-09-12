@@ -258,23 +258,23 @@ const Leaderboard = () => {
    }, [userId]);
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-gray-100 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-850 to-slate-900 text-gray-100 py-8 px-4">
          <div className="max-w-6xl mx-auto">
             {/* Heading */}
             <header className="text-center mb-12">
                <div className="flex items-center justify-center gap-3 text-5xl font-bold mb-4">
                   <Code size={50} className="text-cyan-500 transform translate-y-1" />
-                  <h1 className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text">
+                  <h1 className="text-sky-400">
                      Codeforces Leaderboard
                   </h1>
                </div>
-               <p className="text-lg font-medium bg-gradient-to-r from-teal-400 to-blue-400 text-transparent bg-clip-text">
+               <p className="text-lg font-medium text-sky-400/80">
                   Track your competitive programming progress with friends
                </p>
             </header>
 
             {/* Filter Bar */}
-            <div className="bg-gray-800/50 backdrop-blur-md shadow-xl rounded-xl p-4 mb-8 flex flex-wrap items-center justify-between gap-4 border border-gray-700/80 hover:border-gray-700">
+            <div className="bg-gray-800/50 backdrop-blur-md shadow-xl rounded-xl p-4 mb-8 flex flex-wrap items-center justify-between gap-4 border border-gray-700/50 hover:border-blue-400/20">
                <div className="flex items-center gap-3">
                   <Filter size={20} className="text-cyan-500" />
                   <div className="flex items-center gap-2">
@@ -294,26 +294,26 @@ const Leaderboard = () => {
                   <span className="text-sm text-gray-300">Sort by:</span>
                   <div className="flex shadow-lg rounded-lg overflow-hidden">
                      <button onClick={() => setSortBy("submissions")} className={`px-4 py-2 text-sm transition-all ${sortBy === "submissions"
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
+                        ? "bg-sky-600/90 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
                         Submissions
                      </button>
                      <button onClick={() => setSortBy("problems")} className={`px-4 py-2 text-sm transition-all ${sortBy === "problems"
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
+                        ? "bg-sky-600/90 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
                         Problems
                      </button>
                      <button onClick={() => setSortBy("activeDays")} className={`px-4 py-2 text-sm transition-all ${sortBy === "activeDays"
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
+                        ? "bg-sky-600/90 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`} >
                         Active Days
                      </button>
                      <button onClick={() => setSortBy("rating")} className={`px-4 py-2 text-sm transition-all ${sortBy === "rating" ?
-                        "bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`}>
+                        "bg-sky-600/90 text-white font-medium shadow-inner" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`}>
                         Rating
                      </button>
                   </div>
                </div>
 
-               <button onClick={handleRefresh} disabled={loading} className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 
-               hover:from-blue-700 hover:to-cyan-700 text-white px-5 py-2.5 rounded-lg text-sm transition-all shadow-lg hover:shadow-xl 
+               <button onClick={handleRefresh} disabled={loading} className="flex items-center gap-2 bg-sky-600/90 hover:bg-sky-700/90
+               text-white px-5 py-2.5 rounded-lg text-sm transition-all shadow-lg hover:shadow-xl 
                active:shadow-inner disabled:opacity-60 disabled:pointer-events-none">
                   {loading ? (
                      <Loader size={18} className="animate-spin" />
@@ -325,10 +325,9 @@ const Leaderboard = () => {
             </div>
 
             {loading ? (
-               <div className="flex flex-col items-center justify-center py-20 bg-gray-800/50 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/80">
+               <div className="flex flex-col items-center justify-center py-20 bg-gray-800/50 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/50 ">
                   <div className="relative">
                      <Loader className="animate-spin text-cyan-400 mb-6" size={50} />
-                     <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-blue-400 to-cyan-400 blur-xl opacity-20 rounded-full"></div>
                   </div>
                   <p className="text-gray-200 text-lg font-medium mb-2">Fetching latest submissions data...</p>
                   <p className="text-gray-400 text-sm">
@@ -346,7 +345,7 @@ const Leaderboard = () => {
             ) : (
                <div className="flex flex-col gap-8">
                   {users.length === 0 ? (
-                     <div className="text-center p-16 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-xl border border-blue-900/50">
+                     <div className="text-center p-16 bg-gray-800/50 backdrop-blur-md rounded-xl shadow-xl border border-gray-700/50">
                         <p className="text-gray-300 text-lg">
                            No users found.
                         </p>
@@ -361,7 +360,7 @@ const Leaderboard = () => {
                      </div>
                   ) : (
                      // Main Leaderboard Area
-                     <div className="bg-gray-800/50 backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-blue-900/50">
+                     <div className="bg-gray-800/50 backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-gray-700/50 hover:border-blue-400/20">
                         <div className="overflow-x-auto">
                            <table className=" w-full">
                               <thead className="bg-gray-900/60 text-left">
@@ -472,7 +471,7 @@ const Leaderboard = () => {
                   )}
 
                   <footer className="flex flex-wrap justify-between items-center text-sm text-gray-400 gap-2 mt-4 p-4 bg-gray-800/40 
-                  backdrop-blur-sm rounded-xl border border-blue-900/50">
+                  backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-blue-400/20">
                      <p>Last updated: {new Date().toLocaleString()}</p>
                      <a href="https://github.com/BadalKumar0159/CodeMetrics-Frontend" target="_blank" rel="noopener noreferrer" className="flex items-center 
                      gap-2 hover:text-cyan-400 transition-colors bg-gray-700/50 hover:bg-gray-700 px-3 py-1.5 rounded-lg" >

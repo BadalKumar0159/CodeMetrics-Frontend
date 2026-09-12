@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header'
 import SharePopUp from '../components/SharePopUp';
 import UsernameAdder from '../components/UsernameAdder';
-import CodeMetricsLogo2 from '../components/Logo2';
+import CodeMetricsLogo from '../components/Logo';
 
 const UsernameManagementPage = () => {
    const { email } = useParams();
@@ -22,10 +22,6 @@ const UsernameManagementPage = () => {
    const feedbackFormUrl = "https://forms.gle/XqQ8CFTPYECdVLZ17";
    const shareUrl = "https://codemetrics-rosy.vercel.app/";
    const shareMessage = "Check out CodeMetrics - the ultimate tool for tracking competitive programming progress! Join me in improving our coding skills.";
-
-   const handleGoBack = () => {
-      navigate(-1);
-   };
 
    const handleNavigateToManagement = () => {
       navigate(`/leaderboard/${userId}`);
@@ -86,7 +82,7 @@ const UsernameManagementPage = () => {
          if (response.success) {
             setUserId(response.userid);
             await loadUsernames(response.userid);
-         } else 
+         } else
             setError("User not found. Please check the email address.");
       };
 
@@ -95,10 +91,10 @@ const UsernameManagementPage = () => {
    }, [email]);
 
    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 text-white p-3 sm:p-6">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 to-blue-950 text-white p-3 sm:p-6">
          <div className="max-w-4xl mx-auto">
             {/* Header section with logo */}
-            <Header handleGoBack={handleGoBack} handleShare={handleShare} />
+            <Header handleShare={handleShare} />
 
             {/* Main Content Section */}
             <div className="flex flex-col md:grid md:grid-cols-3 gap-4 sm:gap-6">
@@ -126,7 +122,7 @@ const UsernameManagementPage = () => {
                   )}
 
                   {/* Usernames list */}
-                  <div className="bg-black/30 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/50 overflow-hidden">
+                  <div className="bg-slate-950/50 backdrop-blur-lg rounded-xl shadow-xl border border-gray-700/40 overflow-hidden">
                      <h2 className="flex items-center gap-1 sm:gap-2 p-3 sm:p-4 border-b border-gray-700/70 text-base sm:text-lg font-bold 
                      text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">
                         <Award size={16} className="text-blue-300 sm:w-5 sm:h-5" />
@@ -149,7 +145,7 @@ const UsernameManagementPage = () => {
                      ) : (
                         <ul className="divide-y divide-gray-700/70 max-h-80 sm:max-h-96 overflow-y-auto">
                            {usernames.map((username, index) => (
-                              <li key={username} className={`flex items-center justify-between p-3 sm:p-4 hover:bg-blue-600/10 transition-colors ${index % 2 === 0 ? 'bg-gray-800/30' : 'bg-gray-800/10'}`}>
+                              <li key={username} className={`flex items-center justify-between p-3 sm:p-4 hover:bg-blue-600/10 transition-colors`}>
                                  <div className="flex items-center gap-2 sm:gap-3">
                                     <div className="bg-blue-600/20 p-1.5 sm:p-2 rounded-full">
                                        <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
@@ -181,21 +177,17 @@ const UsernameManagementPage = () => {
 
             {/* Footer action buttons */}
             <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
-               <button onClick={handleNavigateToManagement} className="relative group bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 
-               sm:px-6 py-2.5 sm:py-3.5 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 
-               focus:ring-opacity-50 overflow-hidden text-xs sm:text-sm">
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  <span className="relative flex items-center gap-2">
+               <button onClick={handleNavigateToManagement} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 sm:px-6 py-2.5 
+               sm:py-3.5 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs sm:text-sm" >
+                  <span className="flex items-center gap-2">
                      <Award className="w-4 h-4 sm:w-5 sm:h-5" />
                      <span className="font-medium">View Your Leaderboard</span>
                   </span>
                </button>
 
-               <a href={feedbackFormUrl} target="_blank" rel="noopener noreferrer" className="relative group bg-gradient-to-r from-purple-600 to-pink-600 
-               text-white px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-xl shadow-lg hover:shadow-purple-500/30 transition-all focus:outline-none focus:ring-2 
-               focus:ring-purple-500 focus:ring-opacity-50 overflow-hidden text-xs sm:text-sm" >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  <span className="relative flex items-center gap-2">
+               <a href={feedbackFormUrl} target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 sm:px-6 
+               py-2.5 sm:py-3.5 rounded-xl shadow-lg hover:shadow-purple-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-xs sm:text-sm" >
+                  <span className="flex items-center gap-2">
                      <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                      <span className="font-medium">Give Feedback</span>
                   </span>
@@ -206,7 +198,7 @@ const UsernameManagementPage = () => {
             <div className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t border-gray-700/30 flex justify-center">
                <div className="text-center">
                   <div className="scale-75 sm:scale-100">
-                     <CodeMetricsLogo2 />
+                     <CodeMetricsLogo />
                   </div>
                   <p className="text-gray-500 text-xs mt-1 sm:mt-2">
                      Track your competitive programming progress
